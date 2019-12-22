@@ -41,9 +41,16 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
 
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { QuestionnaireEffects } from './questionnaire/questionnaire.effects';
+import { TibbleComponent } from './tibble/tibble.component';
+import { FileUploadServiceService } from './tibble/file-upload-service.service';
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   imports: [
+    MatPaginatorModule,
+    MatTableModule,
     MatBottomSheetModule,
     ReactiveFormsModule,
     SharedModule,
@@ -78,10 +85,11 @@ import { QuestionnaireEffects } from './questionnaire/questionnaire.effects';
     GearsComponent,
     UsersInfoComponent,
     DynamicFormComponent,
-    QuestionnaireComponent
+    QuestionnaireComponent,
+    TibbleComponent
   ],
   entryComponents: [BottomSheetComponent],
-  providers: [JeuServiceService,QuestionControlService,QuestionService],
+  providers: [JeuServiceService,QuestionControlService,QuestionService,],
   exports: [ DynamicFormComponent, QuestionnaireComponent]
 })
 export class ExamplesModule {

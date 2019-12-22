@@ -10,6 +10,7 @@ import { CrudComponent } from './crud/components/crud.component';
 import { GearsComponent } from './gears/gears.component';
 import { UsersInfoComponent } from './users-info/users-info.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+import { TibbleComponent } from './tibble/tibble.component';
 const routes: Routes = [
   {
     path: '',
@@ -44,6 +45,11 @@ const routes: Routes = [
         path: 'questionnaire',
         component: QuestionnaireComponent,
         data: { title: 'Questionnaire' }
+      },
+      {
+        path: 'tibble',
+        component: TibbleComponent,
+        data: { title: 'Tibble' }
       },
     ]
   }

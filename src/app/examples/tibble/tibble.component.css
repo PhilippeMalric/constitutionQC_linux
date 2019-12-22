@@ -1,0 +1,21 @@
+.highlight{
+ background-color: yellow;
+}
+
+.largeur500{
+  width: 500px
+}
+
+.center{
+  display: table;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.textarea_variable{
+  height: 100px;
+}
+
+.textarea_rule{
+  height: 200px;
+}
