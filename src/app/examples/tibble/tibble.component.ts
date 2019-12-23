@@ -20,6 +20,7 @@ export interface HarmoRule{
   Harmo_rule:string;
   DataSchema_variable:string;
   variables:MyVariable[];
+  harmoV:MyVariable[];
 }
 
 
@@ -33,7 +34,7 @@ export class TibbleComponent implements OnInit {
   tibble :HarmoRule[]
   dataSource : MatTableDataSource<HarmoRule>;
   displayedColumns: string[] = ['position']
-
+  symbol_to_color = {}
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   constructor(private fileUploadService:FileUploadService,private changeDetectorRef: ChangeDetectorRef,) { }
 
@@ -81,7 +82,7 @@ export class TibbleComponent implements OnInit {
   var fileType = inputValue.parentElement.id;
   myReader.onloadend = (e)=> {
       //myReader.result is a String of the uploaded file
-      this.tibble = JSON.parse(myReader.result.toString()).slice(0,20)
+      this.tibble = JSON.parse(myReader.result.toString())//.slice(0,20)
       this.tibble.map(this.createVariables)
 
       this.dataSource = new MatTableDataSource(this.tibble);
@@ -98,24 +99,64 @@ myReader.readAsText(file);
 createVariables =  (hr:HarmoRule,i:number)=>{
 
   this.tibble[i].variables = this.createVariables_helper(hr.Study_variable)
-  console.log("v")
+  this.tibble[i].harmoV = this.createVinHarmo_helper(hr.Harmo_rule)
+  console.log("v1")
   console.log(this.tibble[i].variables)
+  console.log("v2")
+  console.log(this.tibble[i].harmoV)
 }
 
 createVariables_helper = variables=>{
   let v = variables.split(",")
-  console.log(v)
+  //console.log(v)
   return v.map((e,i2)=>{
-    switch(v[i2]){
-      case 'F_AU02_ALCOHOL_FREQ':
-        return new MyVariable(v[i2],"blue")
-      default:
-        return new MyVariable(v[i2],"white")
+    let v_temp = "$"+e.trim()
+    if(v_temp in this.symbol_to_color){
+     return  new MyVariable(v_temp,this.symbol_to_color[v_temp])
     }
+     else{
+      let color = this.getRandomColor();
+      this.symbol_to_color[v_temp] = color
+      return  new MyVariable(v_temp,this.symbol_to_color[v_temp])
+     }
+
   })
 }
 
+createVinHarmo_helper(harmo:string){
+  let re = RegExp("\\$[A-Za-z0-9_]*","g")
+  let v = harmo.match(re);
+  console.log("match")
+  console.log(v)
+  if(v){
+    //console.log(v)
+    return v.map((e,i2)=>{
+      let v_temp = e.replace(/\\$/,"")
+
+      if(v_temp in this.symbol_to_color){
+        return  new MyVariable(v[i2],this.symbol_to_color[v_temp])
+       }
+        else{
+         let color = this.getRandomColor();
+         this.symbol_to_color[v_temp] = color
+         return  new MyVariable(v_temp,this.symbol_to_color[v_temp])
+        }
+    })
+  }
+  else{
+    return []
+  }
+
+}
 
 
+getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 }

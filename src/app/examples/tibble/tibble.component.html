@@ -31,21 +31,26 @@
         <mat-card-content>
            <div [ngStyle]="{'background-color': variable.couleur}" *ngFor="let variable of row.variables">
              <p [ngStyle]="{'background-color': variable.couleur}">
-               Varable : {{variable.symbol}}
+               Variable : {{variable.symbol}}
              </p>
             </div>
 
 
         </mat-card-content>
+        <hr>
         <mat-card-content>
-            Harmo_rule
-
+            <div [ngStyle]="{'background-color': variable.couleur}" *ngFor="let variable of row.harmoV">
+                <p [ngStyle]="{'background-color': variable.couleur}">
+                  Variable : {{variable.symbol}}
+                </p>
+               </div>
         </mat-card-content>
-
+        <hr>
         <mat-card-content>
             <textarea matInput (keyup)="onTextInputChange($event,i)" class="textarea_variable">{{row.Study_variable}}</textarea>
 
         </mat-card-content>
+        <hr>
         <mat-card-content>
             <textarea matInput (keyup)="onTextInputChange($event,i)" class="textarea_rule">{{row.Harmo_rule}}</textarea>
 
