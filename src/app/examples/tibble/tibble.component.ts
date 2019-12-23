@@ -2,12 +2,24 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChil
 import { FileUploadService } from './file-upload.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
+
+export class MyVariable {
+
+  symbol:string;
+  couleur:string;
+  constructor(symbol,couleur){
+    this.symbol=symbol
+    this.couleur=couleur;
+  }
+}
+
 export interface HarmoRule{
   index:string;
   rule_category:string;
   Study_variable:string;
   Harmo_rule:string;
   DataSchema_variable:string;
+  variables:MyVariable[];
 }
 
 
@@ -69,7 +81,9 @@ export class TibbleComponent implements OnInit {
   var fileType = inputValue.parentElement.id;
   myReader.onloadend = (e)=> {
       //myReader.result is a String of the uploaded file
-      this.tibble = JSON.parse(myReader.result.toString())
+      this.tibble = JSON.parse(myReader.result.toString()).slice(0,20)
+      this.tibble.map(this.createVariables)
+
       this.dataSource = new MatTableDataSource(this.tibble);
       console.log(this.tibble)
       this.dataSource.paginator = this.paginator;
@@ -80,5 +94,28 @@ export class TibbleComponent implements OnInit {
 
 myReader.readAsText(file);
 }
+
+createVariables =  (hr:HarmoRule,i:number)=>{
+
+  this.tibble[i].variables = this.createVariables_helper(hr.Study_variable)
+  console.log("v")
+  console.log(this.tibble[i].variables)
+}
+
+createVariables_helper = variables=>{
+  let v = variables.split(",")
+  console.log(v)
+  return v.map((e,i2)=>{
+    switch(v[i2]){
+      case 'F_AU02_ALCOHOL_FREQ':
+        return new MyVariable(v[i2],"blue")
+      default:
+        return new MyVariable(v[i2],"white")
+    }
+  })
+}
+
+
+
 
 }

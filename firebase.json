@@ -1,19 +1,10 @@
 {
-  "hosting": [
-    {
-      "target": "angular-ngrx-material-starter",
-      "public": "public",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    }
+  "hosting": {
+  "public": "public",  // the only required attribute for hosting
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
   ]
+}
 }

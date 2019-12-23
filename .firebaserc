@@ -1,14 +1,5 @@
 {
   "projects": {
-    "default": "constitution-quebec"
-  },
-  "targets": {
-    "constitution-quebec": {
-      "hosting": {
-        "angular-ngrx-material-starter": [
-          "constitution-quebec"
-        ]
-      }
-    }
+    "staging": "constitution-quebec"
   }
 }
