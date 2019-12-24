@@ -30098,7 +30098,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"form-group\">\n<label for=\"file\">Choose File</label>\n<input type=\"file\" (change)=\"changeListener($event)\" #input />\n<hr>\n<mat-form-field>\n    <input matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Filter\">\n</mat-form-field>\n<mat-paginator [pageSizeOptions]=\"[1,5, 10, 20]\" [pageSize]=\"1\"></mat-paginator>\n<div *ngIf=\"dataSource\">\n  <div class=\"center\">\n    <table mat-table [dataSource]=\"dataSource\" class=\"mat-elevation-z8\">\n      <!--- Note that these columns can be defined in any order.\n            The actual rendered columns are set as a property on the row definition\" -->\n\n      <!-- Position Column -->\n      <ng-container matColumnDef=\"position\">\n        <th mat-header-cell *matHeaderCellDef> No. </th>\n        <td mat-cell *matCellDef=\"let row; let i = index\" [ngStyle]=\"{'width': '1200px'}\">\n          <mat-card\n          [ngClass]=\"{'highlightB': row.rule_category=='case_when','highlightY': row.rule_category=='ifelse','routeAnimationsElements':true}\" >\n\n        <mat-card-header>\n            <div class=\"flex\">\n              <h3>{{row.DataSchema_variable}}</h3>\n              <h5>{{row.rule_category}}</h5>\n              <h4  class=\"col-sm-10\" data-testid=\"item-title\">{{i}}</h4>\n            </div>\n        </mat-card-header>\n\n        <mat-card-content *ngIf=\"row.variables\">\n            <mat-chip-list class=\"mat-chip-list-stacked\" aria-label=\"Color selection\">\n              <mat-chip *ngFor=\"let chip of row.variables\" selected [style.background-color]=\"chip.couleur\">\n                {{chip.symbol}} : {{chip.couleur}}\n              </mat-chip>\n            </mat-chip-list>\n        </mat-card-content>\n        <hr>\n        <div></div>\n        <mat-card-content *ngIf=\"row.harmoV\">\n            <mat-chip-list class=\"mat-chip-list-stacked\" aria-label=\"Color selection\">\n                <mat-chip *ngFor=\"let chip of row.harmoV\" selected [style.background-color]=\"chip.couleur\">\n                  {{chip.symbol}} : {{chip.couleur}}\n                </mat-chip>\n            </mat-chip-list>\n\n        </mat-card-content>\n        <hr>\n        <mat-card-content>\n            <textarea matInput (keyup)=\"onTextInputChange($event,i)\" class=\"textarea_variable\">{{row.Study_variable}}</textarea>\n\n        </mat-card-content>\n        <hr>\n        <mat-card-content>\n            <textarea matInput (keyup)=\"onTextInputChange($event,i)\" class=\"textarea_rule\">{{row.Harmo_rule}}</textarea>\n\n        </mat-card-content>\n\n          <mat-card-actions>\n            <button mat-raised-button color=\"accent\" (click)=\"launch(i)\">Envoyer</button>\n          </mat-card-actions>\n        </mat-card> </td>\n\n      </ng-container>\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    </table>\n  </div>\n\n</div>\n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"form-group\">\n<label for=\"file\">Choose File</label>\n<input type=\"file\" (change)=\"changeListener($event)\" #input />\n<hr>\n<mat-form-field>\n    <input matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Filter\">\n</mat-form-field>\n<mat-paginator [pageSizeOptions]=\"[1,5, 10, 20,100]\" [pageSize]=\"1\"></mat-paginator>\n<div *ngIf=\"dataSource\">\n  <div class=\"center\">\n    <table mat-table [dataSource]=\"dataSource\" class=\"mat-elevation-z8\">\n      <!--- Note that these columns can be defined in any order.\n            The actual rendered columns are set as a property on the row definition\" -->\n\n      <!-- Position Column -->\n      <ng-container matColumnDef=\"position\">\n        <td mat-cell *matCellDef=\"let row;let i = index;\" [ngStyle]=\"{'width': '1800px'}\">\n          <mat-card\n          [ngClass]=\"{'highlightB': row.rule_category=='case_when','highlightY': row.rule_category=='ifelse','routeAnimationsElements':true}\" >\n\n        <mat-card-header>\n            <div class=\"flex\">\n              <h3>{{row.DataSchema_variable}}</h3>\n              <h5>{{row.rule_category}}</h5>\n            </div>\n        </mat-card-header>\n\n        <mat-card-content *ngIf=\"row.variables\">\n            <mat-chip-list [ngClass]=\"{'chipBlock2':true}\" aria-label=\"Color selection\">\n              <mat-chip  *ngFor=\"let chip of row.variables\" [style.color]=\"'white'\" [style.background-color]=\"chip.couleur\" [style.margin-left]=\"'20px'\">\n                {{chip.symbol}} : {{chip.couleur}}\n\n                  <mat-chip-list class=\"mat-chip-list\" aria-label=\"words\" >\n                    <mat-chip  *ngFor=\"let chip2 of chip.decomposition\" [style.color]=\"'white'\" [style.background-color]=\"chip2.couleur\">{{chip2.symbol}}</mat-chip>\n                  </mat-chip-list>\n              </mat-chip>\n            </mat-chip-list>\n        </mat-card-content>\n        <hr>\n        <hr>\n        <mat-card-content *ngIf=\"row.harmoV\">\n            <mat-chip-list [ngClass]=\"{'chipBlock2':true}\" aria-label=\"Color selection\">\n                <mat-chip *ngFor=\"let chip of row.harmoV\" selected [style.background-color]=\"chip.couleur\">\n                  {{chip.symbol}} : {{chip.couleur}}\n                  <mat-chip-list class=\"mat-chip-list\" aria-label=\"words\" >\n                    <mat-chip  *ngFor=\"let chip2 of chip.decomposition\" [style.color]=\"'white'\" [style.background-color]=\"chip2.couleur\">{{chip2.symbol}}</mat-chip>\n                  </mat-chip-list>\n                </mat-chip>\n            </mat-chip-list>\n        </mat-card-content>\n        <hr>\n        <hr>\n        <hr>\n        <mat-card-content *ngIf=\"row.harmoV2\">\n          <mat-chip-list [ngClass]=\"{'chipBlock2':true}\" aria-label=\"Color selection\">\n              <mat-chip *ngFor=\"let chip of row.harmoV2\" selected [style.background-color]=\"chip.couleur\">\n                {{chip.symbol}} : {{chip.couleur}}\n                <mat-chip-list class=\"mat-chip-list\" aria-label=\"words\" >\n                  <mat-chip  *ngFor=\"let chip2 of chip.decomposition\" [style.color]=\"'white'\" [style.background-color]=\"chip2.couleur\">{{chip2.symbol}}</mat-chip>\n                </mat-chip-list>\n              </mat-chip>\n          </mat-chip-list>\n      </mat-card-content>\n      <hr>\n        <mat-card-content>\n            <textarea matInput (keyup)=\"onTextInputChange($event,i)\" class=\"textarea_variable\">{{row.Study_variable}}</textarea>\n\n        </mat-card-content>\n        <hr>\n        <mat-card-content>\n            <textarea matInput (keyup)=\"onTextInputChange($event,i)\" class=\"textarea_rule\">{{row.Harmo_rule}}</textarea>\n\n        </mat-card-content>\n        <hr>\n        <hr>\n        <hr>\n        <hr>\n        </mat-card> </td>\n      </ng-container>\n\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    </table>\n  </div>\n\n</div>\n\n\n");
 
 /***/ }),
 
@@ -33550,6 +33550,7 @@ var __importDefault = (undefined && undefined.__importDefault) || function (mod)
 let FileUploadService = class FileUploadService {
     constructor(httpClient) {
         this.httpClient = httpClient;
+        this.words_dict = {};
     }
     postFile(fileToUpload) {
         const endpoint = 'your-destination-url';
@@ -33582,7 +33583,7 @@ FileUploadService = __decorate([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".highlightY{\r\n background-color: yellow;\r\n}\r\n\r\nhighlightB{\r\n  background-color: rgb(255, 187, 0);\r\n }\r\n\r\n.largeur500{\r\n  width: 500px\r\n}\r\n\r\n.center{\r\n  display: table;\r\n  margin: auto;\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.textarea_variable{\r\n  height: 100px;\r\n}\r\n\r\n.textarea_rule{\r\n  height: 200px;\r\n}\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZXhhbXBsZXMvdGliYmxlL3RpYmJsZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0NBQ0Msd0JBQXdCO0FBQ3pCOztBQUVBO0VBQ0Usa0NBQWtDO0NBQ25DOztBQUVEO0VBQ0U7QUFDRjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxZQUFZO0VBQ1osbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsYUFBYTtBQUNmOztBQUVBO0VBQ0UsYUFBYTtBQUNmIiwiZmlsZSI6InNyYy9hcHAvZXhhbXBsZXMvdGliYmxlL3RpYmJsZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmhpZ2hsaWdodFl7XHJcbiBiYWNrZ3JvdW5kLWNvbG9yOiB5ZWxsb3c7XHJcbn1cclxuXHJcbmhpZ2hsaWdodEJ7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMTg3LCAwKTtcclxuIH1cclxuXHJcbi5sYXJnZXVyNTAwe1xyXG4gIHdpZHRoOiA1MDBweFxyXG59XHJcblxyXG4uY2VudGVye1xyXG4gIGRpc3BsYXk6IHRhYmxlO1xyXG4gIG1hcmdpbjogYXV0bztcclxuICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG59XHJcblxyXG4udGV4dGFyZWFfdmFyaWFibGV7XHJcbiAgaGVpZ2h0OiAxMDBweDtcclxufVxyXG5cclxuLnRleHRhcmVhX3J1bGV7XHJcbiAgaGVpZ2h0OiAyMDBweDtcclxufVxyXG5cclxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".highlightY{\r\n background-color: yellow;\r\n}\r\n\r\n.highlightB{\r\n  background-color: rgb(255, 187, 0);\r\n }\r\n\r\n.largeur500{\r\n  width: 500px\r\n}\r\n\r\n.center{\r\n  display: table;\r\n  margin: auto;\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.textarea_variable{\r\n  height: 100px;\r\n}\r\n\r\n.textarea_rule{\r\n  height: 200px;\r\n}\r\n\r\n.chipBlock2 {\r\n  margin-left: 15px;\r\n  -ms-flex-wrap: nowrap;\r\n      flex-wrap: nowrap;\r\n  -ms-flex-direction: row;\r\n      flex-direction: row;\r\n  -ms-flex-align: start;\r\n      align-items: flex-start;\r\n}\r\n\r\n.divChip{\r\n  width: inherit;\r\n}\r\n\r\n.fontWhite{\r\n\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZXhhbXBsZXMvdGliYmxlL3RpYmJsZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0NBQ0Msd0JBQXdCO0FBQ3pCOztBQUVBO0VBQ0Usa0NBQWtDO0NBQ25DOztBQUVEO0VBQ0U7QUFDRjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxZQUFZO0VBQ1osbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsYUFBYTtBQUNmOztBQUVBO0VBQ0UsYUFBYTtBQUNmOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLHFCQUFpQjtNQUFqQixpQkFBaUI7RUFDakIsdUJBQW1CO01BQW5CLG1CQUFtQjtFQUNuQixxQkFBdUI7TUFBdkIsdUJBQXVCO0FBQ3pCOztBQUVBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQTs7QUFFQSIsImZpbGUiOiJzcmMvYXBwL2V4YW1wbGVzL3RpYmJsZS90aWJibGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5oaWdobGlnaHRZe1xyXG4gYmFja2dyb3VuZC1jb2xvcjogeWVsbG93O1xyXG59XHJcblxyXG4uaGlnaGxpZ2h0QntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAxODcsIDApO1xyXG4gfVxyXG5cclxuLmxhcmdldXI1MDB7XHJcbiAgd2lkdGg6IDUwMHB4XHJcbn1cclxuXHJcbi5jZW50ZXJ7XHJcbiAgZGlzcGxheTogdGFibGU7XHJcbiAgbWFyZ2luOiBhdXRvO1xyXG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XHJcbn1cclxuXHJcbi50ZXh0YXJlYV92YXJpYWJsZXtcclxuICBoZWlnaHQ6IDEwMHB4O1xyXG59XHJcblxyXG4udGV4dGFyZWFfcnVsZXtcclxuICBoZWlnaHQ6IDIwMHB4O1xyXG59XHJcblxyXG4uY2hpcEJsb2NrMiB7XHJcbiAgbWFyZ2luLWxlZnQ6IDE1cHg7XHJcbiAgZmxleC13cmFwOiBub3dyYXA7XHJcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICBhbGlnbi1pdGVtczogZmxleC1zdGFydDtcclxufVxyXG5cclxuLmRpdkNoaXB7XHJcbiAgd2lkdGg6IGluaGVyaXQ7XHJcbn1cclxuXHJcbi5mb250V2hpdGV7XHJcblxyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -33616,9 +33617,10 @@ var __importDefault = (undefined && undefined.__importDefault) || function (mod)
 
 
 class MyVariable {
-    constructor(symbol, couleur) {
+    constructor(symbol, couleur, decomposition) {
         this.symbol = symbol;
         this.couleur = couleur;
+        this.decomposition = decomposition;
     }
 }
 let TibbleComponent = class TibbleComponent {
@@ -33628,9 +33630,12 @@ let TibbleComponent = class TibbleComponent {
         this.fileToUpload = null;
         this.displayedColumns = ['position'];
         this.symbol_to_color = {};
+        this.word_to_color = {};
         this.createVariables = (hr, i) => {
             this.tibble[i].variables = this.createVariables_helper(hr.Study_variable).sort((a, b) => a.symbol.localeCompare(b.symbol));
-            this.tibble[i].harmoV = this.createVinHarmo_helper(hr.Harmo_rule).sort((a, b) => a.symbol.localeCompare(b.symbol));
+            this.tibble[i].harmoV2 = this.createVinHarmo_helper(hr.Harmo_rule);
+            let hr_temp = JSON.parse(JSON.stringify(this.tibble[i].harmoV2));
+            this.tibble[i].harmoV = hr_temp.sort((a, b) => a.symbol.localeCompare(b.symbol));
             console.log("v1");
             console.log(this.tibble[i].variables);
             console.log("v2");
@@ -33641,13 +33646,76 @@ let TibbleComponent = class TibbleComponent {
             //console.log(v)
             return v.map((e, i2) => {
                 let v_temp = "$" + e.trim();
+                let decomposition = [];
                 if (v_temp in this.symbol_to_color) {
-                    return new MyVariable(v_temp, this.symbol_to_color[v_temp]);
+                    if (v_temp.split("_").length <= 1) {
+                        decomposition = [v_temp];
+                    }
+                    else {
+                        decomposition = this.decompose(v_temp);
+                    }
+                    return new MyVariable(v_temp, this.symbol_to_color[v_temp], decomposition);
                 }
                 else {
                     let color = this.getRandomColor();
                     this.symbol_to_color[v_temp] = color;
-                    return new MyVariable(v_temp, this.symbol_to_color[v_temp]);
+                    let decomposition = [];
+                    if (v_temp.split("_").length <= 1) {
+                        decomposition = [v_temp];
+                    }
+                    else {
+                        decomposition = this.decompose(v_temp);
+                    }
+                    return new MyVariable(v_temp, this.symbol_to_color[v_temp], decomposition);
+                }
+            });
+        };
+        this.createVinHarmo_helper = (harmo) => {
+            let re = RegExp("\\$[A-Za-z0-9_\.]*", "g");
+            let v = harmo.match(re);
+            console.log("match");
+            console.log(v);
+            if (v) {
+                return v.map((e, i2) => {
+                    let v_temp = e.trim();
+                    let decomposition = [];
+                    if (v_temp in this.symbol_to_color) {
+                        if (v_temp.split("_").length <= 1) {
+                            decomposition = [v_temp];
+                        }
+                        else {
+                            decomposition = this.decompose(v_temp);
+                        }
+                        return new MyVariable(v_temp, this.symbol_to_color[v_temp], decomposition);
+                    }
+                    else {
+                        let color = this.getRandomColor();
+                        this.symbol_to_color[v_temp] = color;
+                        let decomposition = [];
+                        if (v_temp.split("_").length <= 1) {
+                            decomposition = [v_temp];
+                        }
+                        else {
+                            decomposition = this.decompose(v_temp);
+                        }
+                        return new MyVariable(v_temp, this.symbol_to_color[v_temp], decomposition);
+                    }
+                });
+            }
+            else {
+                return [];
+            }
+        };
+        this.decompose = (symbol) => {
+            let words = symbol.split("_");
+            return words.map((w) => {
+                if (w in this.word_to_color) {
+                    return new MyVariable(w, this.word_to_color[w], []);
+                }
+                else {
+                    let color = this.getRandomColor();
+                    this.word_to_color[w] = color;
+                    return new MyVariable(w, this.word_to_color[w], []);
                 }
             });
         };
@@ -33701,33 +33769,12 @@ let TibbleComponent = class TibbleComponent {
         };
         myReader.readAsText(file);
     }
-    createVinHarmo_helper(harmo) {
-        let re = RegExp("\\$[A-Za-z0-9_]*", "g");
-        let v = harmo.match(re);
-        console.log("match");
-        console.log(v);
-        if (v) {
-            //console.log(v)
-            return v.map((e, i2) => {
-                let v_temp = e.replace(/\\$/, "");
-                if (v_temp in this.symbol_to_color) {
-                    return new MyVariable(v[i2], this.symbol_to_color[v_temp]);
-                }
-                else {
-                    let color = this.getRandomColor();
-                    this.symbol_to_color[v_temp] = color;
-                    return new MyVariable(v_temp, this.symbol_to_color[v_temp]);
-                }
-            });
-        }
-        else {
-            return [];
-        }
-    }
     getRandomColor() {
+        var letters2 = '56789ABC';
         var letters = '0123456789ABCDEF';
         var color = '#00';
-        for (var i = 0; i < 4; i++) {
+        color += letters2[Math.floor(Math.random() * letters2.length)];
+        for (var i = 0; i < 3; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
         return color;

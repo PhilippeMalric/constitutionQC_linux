@@ -15,50 +15,53 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="position">
+
         <td mat-cell *matCellDef="let row;let i = index;" [ngStyle]="{'width': '1800px'}">
           <mat-card
           [ngClass]="{'highlightB': row.rule_category=='case_when','highlightY': row.rule_category=='ifelse','routeAnimationsElements':true}" >
 
         <mat-card-header>
             <div class="flex">
-              <h3>{{row.DataSchema_variable}}</h3>
-              <h5>{{row.rule_category}}</h5>
+              <h2>{{row.DataSchema_variable}}</h2>
+              <h4>{{row.rule_category}}</h4>
             </div>
         </mat-card-header>
 
         <mat-card-content *ngIf="row.variables">
+          <h3>Variables</h3>
             <mat-chip-list [ngClass]="{'chipBlock2':true}" aria-label="Color selection">
-              <mat-chip  *ngFor="let chip of row.variables" [style.color]="'white'" [style.background-color]="chip.couleur" [style.margin-left]="'20px'">
-                {{chip.symbol}} : {{chip.couleur}}
-
-                  <mat-chip-list class="mat-chip-list" aria-label="words" >
+              <mat-chip  *ngFor="let chip of row.variables" [style.color]="'white'" [style.background-color]="chip.couleur"  [style.width]="'1600px'">
+                {{chip.symbol}} :
+                  <mat-chip-list class="mat-chip-list" aria-label="words" [style.margin-left]="'20px'" [style.margin-rigth]="'20px'">
                     <mat-chip  *ngFor="let chip2 of chip.decomposition" [style.color]="'white'" [style.background-color]="chip2.couleur">{{chip2.symbol}}</mat-chip>
                   </mat-chip-list>
+                   :  {{chip.couleur}}
               </mat-chip>
             </mat-chip-list>
         </mat-card-content>
         <hr>
-        <hr>
         <mat-card-content *ngIf="row.harmoV">
-            <mat-chip-list [ngClass]="{'chipBlock2':true}" aria-label="Color selection">
-                <mat-chip *ngFor="let chip of row.harmoV" selected [style.background-color]="chip.couleur">
-                  {{chip.symbol}} : {{chip.couleur}}
-                  <mat-chip-list class="mat-chip-list" aria-label="words" >
+          <h3>Sorted Harmo rules variables</h3>
+            <mat-chip-list [ngClass]="{'chipBlock2':true}" aria-label="Color selection" >
+                <mat-chip *ngFor="let chip of row.harmoV" selected [style.background-color]="chip.couleur" [style.width]="'1600px'">
+                  {{chip.symbol}} :
+                  <mat-chip-list class="mat-chip-list" aria-label="words" [style.margin-left]="'20px'" [style.margin-rigth]="'20px'">
                     <mat-chip  *ngFor="let chip2 of chip.decomposition" [style.color]="'white'" [style.background-color]="chip2.couleur">{{chip2.symbol}}</mat-chip>
                   </mat-chip-list>
+                  : {{chip.couleur}}
                 </mat-chip>
             </mat-chip-list>
         </mat-card-content>
         <hr>
-        <hr>
-        <hr>
         <mat-card-content *ngIf="row.harmoV2">
+          <h3>Unsorted Harmo rules variables</h3>
           <mat-chip-list [ngClass]="{'chipBlock2':true}" aria-label="Color selection">
-              <mat-chip *ngFor="let chip of row.harmoV2" selected [style.background-color]="chip.couleur">
-                {{chip.symbol}} : {{chip.couleur}}
-                <mat-chip-list class="mat-chip-list" aria-label="words" >
+              <mat-chip *ngFor="let chip of row.harmoV2" selected [style.background-color]="chip.couleur" [style.width]="'1600px'">
+                {{chip.symbol}} :
+                <mat-chip-list class="mat-chip-list" aria-label="words" [style.margin-left]="'20px'" [style.margin-rigth]="'20px'">
                   <mat-chip  *ngFor="let chip2 of chip.decomposition" [style.color]="'white'" [style.background-color]="chip2.couleur">{{chip2.symbol}}</mat-chip>
                 </mat-chip-list>
+                : {{chip.couleur}}
               </mat-chip>
           </mat-chip-list>
       </mat-card-content>
