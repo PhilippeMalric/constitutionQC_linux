@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class FileUploadService {
 
+  words_dict = {}
+
   constructor(private httpClient:HttpClient) { }
 
 

@@ -1,6 +1,10 @@
-.highlight{
+.highlightY{
  background-color: yellow;
 }
+
+.highlightB{
+  background-color: rgb(255, 187, 0);
+ }
 
 .largeur500{
   width: 500px
@@ -20,3 +24,17 @@
   height: 200px;
 }
 
+.chipBlock2 {
+  margin-left: 15px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.divChip{
+  width: inherit;
+}
+
+.fontWhite{
+
+}

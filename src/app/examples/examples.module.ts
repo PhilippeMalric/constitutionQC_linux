@@ -46,9 +46,12 @@ import { FileUploadServiceService } from './tibble/file-upload-service.service';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @NgModule({
   imports: [
+    MatChipsModule,
     MatPaginatorModule,
     MatTableModule,
     MatBottomSheetModule,

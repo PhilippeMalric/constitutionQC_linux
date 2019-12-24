@@ -7,11 +7,16 @@ export class MyVariable {
 
   symbol:string;
   couleur:string;
-  constructor(symbol,couleur){
+  decomposition:MyVariable[];
+  constructor(symbol,couleur,decomposition){
     this.symbol=symbol
     this.couleur=couleur;
+    this.decomposition=decomposition;
+
+
   }
 }
+
 
 export interface HarmoRule{
   index:string;
@@ -21,6 +26,7 @@ export interface HarmoRule{
   DataSchema_variable:string;
   variables:MyVariable[];
   harmoV:MyVariable[];
+  harmoV2:MyVariable[];
 }
 
 
@@ -30,11 +36,15 @@ export interface HarmoRule{
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TibbleComponent implements OnInit {
+
+
   fileToUpload: File = null;
   tibble :HarmoRule[]
   dataSource : MatTableDataSource<HarmoRule>;
   displayedColumns: string[] = ['position']
   symbol_to_color = {}
+  word_to_color = {}
+
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   constructor(private fileUploadService:FileUploadService,private changeDetectorRef: ChangeDetectorRef,) { }
 
@@ -98,8 +108,13 @@ myReader.readAsText(file);
 
 createVariables =  (hr:HarmoRule,i:number)=>{
 
-  this.tibble[i].variables = this.createVariables_helper(hr.Study_variable)
-  this.tibble[i].harmoV = this.createVinHarmo_helper(hr.Harmo_rule)
+  this.tibble[i].variables = this.createVariables_helper(hr.Study_variable).sort((a, b) => a.symbol.localeCompare(b.symbol))
+  this.tibble[i].harmoV2 = this.createVinHarmo_helper(hr.Harmo_rule)
+
+  let hr_temp =  JSON.parse(JSON.stringify(this.tibble[i].harmoV2))
+  this.tibble[i].harmoV = hr_temp.sort((a, b) => a.symbol.localeCompare(b.symbol))
+
+
   console.log("v1")
   console.log(this.tibble[i].variables)
   console.log("v2")
@@ -111,36 +126,73 @@ createVariables_helper = variables=>{
   //console.log(v)
   return v.map((e,i2)=>{
     let v_temp = "$"+e.trim()
+    let decomposition = []
     if(v_temp in this.symbol_to_color){
-     return  new MyVariable(v_temp,this.symbol_to_color[v_temp])
+
+
+      if(v_temp.split("_").length <= 1){
+        decomposition = [v_temp]
+      }
+      else{
+        decomposition = this.decompose(v_temp)
+      }
+
+     return  new MyVariable(v_temp,this.symbol_to_color[v_temp],decomposition)
     }
      else{
       let color = this.getRandomColor();
       this.symbol_to_color[v_temp] = color
-      return  new MyVariable(v_temp,this.symbol_to_color[v_temp])
+      let decomposition = []
+
+      if(v_temp.split("_").length <= 1){
+        decomposition = [v_temp]
+      }
+      else{
+        decomposition = this.decompose(v_temp)
+      }
+
+      return  new MyVariable(v_temp,this.symbol_to_color[v_temp],decomposition)
      }
 
   })
 }
 
-createVinHarmo_helper(harmo:string){
-  let re = RegExp("\\$[A-Za-z0-9_]*","g")
+createVinHarmo_helper = (harmo:string)=>{
+  let re = RegExp("\\$[A-Za-z0-9_\.]*","g")
   let v = harmo.match(re);
   console.log("match")
   console.log(v)
   if(v){
-    //console.log(v)
     return v.map((e,i2)=>{
-      let v_temp = e.replace(/\\$/,"")
-
+      let v_temp = e.trim()
+      let decomposition = []
       if(v_temp in this.symbol_to_color){
-        return  new MyVariable(v[i2],this.symbol_to_color[v_temp])
-       }
-        else{
-         let color = this.getRandomColor();
-         this.symbol_to_color[v_temp] = color
-         return  new MyVariable(v_temp,this.symbol_to_color[v_temp])
+
+
+        if(v_temp.split("_").length <= 1){
+          decomposition = [v_temp]
         }
+        else{
+          decomposition = this.decompose(v_temp)
+        }
+
+       return  new MyVariable(v_temp,this.symbol_to_color[v_temp],decomposition)
+      }
+       else{
+        let color = this.getRandomColor();
+        this.symbol_to_color[v_temp] = color
+        let decomposition = []
+
+        if(v_temp.split("_").length <= 1){
+          decomposition = [v_temp]
+        }
+        else{
+          decomposition = this.decompose(v_temp)
+        }
+
+        return  new MyVariable(v_temp,this.symbol_to_color[v_temp],decomposition)
+       }
+
     })
   }
   else{
@@ -149,11 +201,30 @@ createVinHarmo_helper(harmo:string){
 
 }
 
+decompose = (symbol)=>{
+  let words = symbol.split("_")
+  return words.map(
+    (w)=>{
+
+
+if(w in this.word_to_color){
+  return new MyVariable(w, this.word_to_color[w],[])
+  }
+  else{
+    let color = this.getRandomColor();
+    this.word_to_color[w] = color
+    return new MyVariable(w, this.word_to_color[w],[])
+  }
+ })
+}
+
 
 getRandomColor() {
+  var letters2 = '56789ABC';
   var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
+  var color = '#00';
+  color += letters2[Math.floor(Math.random() * letters2.length)];
+  for (var i = 0; i < 3; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
